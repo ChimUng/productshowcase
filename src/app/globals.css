@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* Định nghĩa mượt mà cho toàn bộ hệ thống */
 html,
@@ -9,6 +7,13 @@ body {
   margin: 0;
   font-family: var(--font-geist-sans), sans-serif;
   scroll-behavior: smooth;
+}
+
+html, body {
+    background-color: #0a0a0f;
+    color: #ecedee;
+    color-scheme: dark;  /* scroll trình duyệt tự tối */
+    min-height: 100vh;
 }
 
 /* Thanh cuộn (Scrollbar) hiện đại, bo góc đồng bộ NextUI */

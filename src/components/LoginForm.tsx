@@ -49,13 +49,13 @@ const LoginForm = () => {
                     name="email"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel className="text-sm font-medium text-gray-700">
+                            <FormLabel className="text-sm font-medium text-gray-200">
                                 Email
                             </FormLabel>
                             <FormControl>
                                 <Input
                                     placeholder="smartschoolbus@gmail.com"
-                                    className="h-10 rounded-lg border-gray-300 focus:border-[#0079CE] focus:ring-[#0079CE]"
+                                    className="h-10 rounded-lg bg-white text-gray-900 border-gray-300 focus:border-[#D14836] focus:ring-[#D14836] placeholder:text-gray-400"
                                     {...field}
                                 />
                             </FormControl>
@@ -69,14 +69,14 @@ const LoginForm = () => {
                     name="password"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel className="text-sm font-medium text-gray-700">
+                            <FormLabel className="text-sm font-medium text-gray-200">
                                 Mật khẩu
                             </FormLabel>
                             <FormControl>
                                 <Input
                                     placeholder="••••••••"
                                     type="password"
-                                    className="h-10 rounded-lg border-gray-300 focus:border-[#0079CE] focus:ring-[#0079CE]"
+                                    className="h-10 rounded-lg bg-white text-gray-900 border-gray-300 focus:border-[#D14836] focus:ring-[#D14836] placeholder:text-gray-400"
                                     {...field}
                                 />
                             </FormControl>
@@ -88,7 +88,7 @@ const LoginForm = () => {
                 <Button
                     type="submit"
                     disabled={loading}
-                    className="w-full h-10 mt-2 rounded-lg bg-[#0079CE] hover:bg-[#005fa3] text-white font-semibold cursor-pointer transition-colors"
+                    className="w-full h-10 mt-2 rounded-lg bg-[#D14836] hover:bg-[#b53c2d] text-white font-semibold cursor-pointer transition-colors"
                 >
                     {loading ? "Đang đăng nhập..." : "Đăng nhập"}
                 </Button>

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Controller, FieldPath, FieldValues, FormProvider, UseFormReturn } from "react-hook-form"
+import { Controller, FieldPath, FieldValues, FormProvider, UseFormReturn, useFormContext } from "react-hook-form"
 
 const Form = FormProvider
 
@@ -27,12 +27,20 @@ const FormField = <
 
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext)
+  const itemContext = React.useContext(FormItemContext)
+  const { getFieldState, formState } = useFormContext()
 
   if (!fieldContext) {
     throw new Error("useFormField should be used within <FormField>")
   }
 
-  return fieldContext
+  const fieldState = getFieldState(fieldContext.name, formState)
+
+  return {
+    id: itemContext.id,
+    name: fieldContext.name,
+    ...fieldState,
+  }
 }
 
 interface FormItemContextValue {
@@ -76,9 +84,20 @@ FormControl.displayName = "FormControl"
 const FormMessage = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <p ref={ref} className={className} {...props} />
-))
+>(({ className, children, ...props }, ref) => {
+  const { error } = useFormField()
+  const body = error ? String(error?.message) : children
+
+  if (!body) {
+    return null
+  }
+
+  return (
+    <p ref={ref} className={`text-sm font-medium text-red-500 ${className || ""}`} {...props}>
+      {body}
+    </p>
+  )
+})
 FormMessage.displayName = "FormMessage"
 
 export {
