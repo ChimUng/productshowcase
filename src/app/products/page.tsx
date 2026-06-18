@@ -22,7 +22,7 @@ const Page = async ({ searchParams }: PageProps) => {
     const params = await searchParams;
 
     return (
-        <div className="min-h-100vh bg-[#0a0a0f]">
+        <div>
             <Navbarcomponent />
             <div className="max-w-[94%] xl:max-w-[90%] mx-auto pt-[90px]">
                 <Catalog
