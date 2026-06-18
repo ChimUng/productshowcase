@@ -36,7 +36,7 @@ const LoginForm = () => {
             <div>
                 <label style={{
                     display: 'block', fontSize: '13px', fontWeight: 500,
-                    color: '#a1a1aa', marginBottom: '7px',
+                    color: '#a1a1aa', marginBottom: '6px'
                 }}>
                     Email
                 </label>
@@ -55,21 +55,24 @@ const LoginForm = () => {
                         colorScheme: 'dark',
                     }}
                     onFocus={e => e.target.style.borderColor = '#0079CE'}
-                    onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
-                    {...form.register('email')}
+                    // KHẮC PHỤC: Đưa logic onBlur vào trong register để không đè mất onChange/name gốc của form
+                    {...form.register('email', {
+                        onBlur: (e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'
+                    })}
                 />
+                {/* Hiện lỗi động chuẩn xác */}
                 {errors.email && (
-                    <p style={{ color: '#f87171', fontSize: '12px', marginTop: '5px' }}>
+                    <p style={{ color: '#f87171', fontSize: '12px', marginTop: '5px', marginBottom: 0 }}>
                         {errors.email.message}
                     </p>
                 )}
             </div>
 
-            {/* Password */}
+            {/* Mật khẩu */}
             <div>
                 <label style={{
                     display: 'block', fontSize: '13px', fontWeight: 500,
-                    color: '#a1a1aa', marginBottom: '7px',
+                    color: '#a1a1aa', marginBottom: '6px'
                 }}>
                     Mật khẩu
                 </label>
@@ -88,17 +91,20 @@ const LoginForm = () => {
                         colorScheme: 'dark',
                     }}
                     onFocus={e => e.target.style.borderColor = '#0079CE'}
-                    onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
-                    {...form.register('password')}
+                    // KHẮC PHỤC: Tương tự với ô password
+                    {...form.register('password', {
+                        onBlur: (e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'
+                    })}
                 />
+                {/* Hiện lỗi động chuẩn xác */}
                 {errors.password && (
-                    <p style={{ color: '#f87171', fontSize: '12px', marginTop: '5px' }}>
+                    <p style={{ color: '#f87171', fontSize: '12px', marginTop: '5px', marginBottom: 0 }}>
                         {errors.password.message}
                     </p>
                 )}
             </div>
 
-            {/* Submit */}
+            {/* Nút đăng nhập */}
             <button
                 type="submit"
                 disabled={loading}
@@ -116,7 +122,7 @@ const LoginForm = () => {
                 onMouseEnter={e => { if (!loading) (e.currentTarget).style.opacity = '0.88' }}
                 onMouseLeave={e => { if (!loading) (e.currentTarget).style.opacity = '1' }}
             >
-                {loading ? "Đang đăng nhập..." : "Đăng nhập"}
+                {loading ? "Đang xử lý..." : "Đăng nhập"}
             </button>
         </form>
     )

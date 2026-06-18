@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import LoginForm from "@/components/LoginForm";
@@ -70,7 +69,7 @@ const Page = () => {
                 <LoginForm />
 
                 <div style={{ textAlign: 'center', marginTop: '22px' }}>
-                    <Link href='/register' style={{
+                    <Link href='/login' style={{
                         fontSize: '13px', color: '#0079CE',
                         fontWeight: 500, textDecoration: 'none',
                     }}>
