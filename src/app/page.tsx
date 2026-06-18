@@ -1,37 +1,33 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import { MotionDiv } from '@/utils/MotionDiv'
 import Link from 'next/link';
 import Herosection from '@/components/home/Herosection';
 import ProductCards from '@/components/CardComponent/ProductCards';
 import { Product } from '@/lib/types';
+import Navbarcomponent from '@/components/navbar/Navbar'
 
-// Swap này ra fetch('/api/product') khi cần
-const MOCK_PRODUCTS: Product[] = [
-    { id: 1, name: 'Laptop Pro', description: 'High-performance laptop with 16GB RAM and 512GB SSD', price: 1299.99, category: 'Electronics', image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&h=600&fit=crop', stock: 15, rating: 4.5 },
-    { id: 2, name: 'Wireless Mouse', description: 'Ergonomic wireless mouse with 2.4GHz receiver', price: 29.99, category: 'Accessories', image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=1200&h=600&fit=crop', stock: 50, rating: 4.2 },
-    { id: 3, name: '4K Monitor', description: '27 inch 4K UHD display with HDR support', price: 599.99, category: 'Electronics', image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=1200&h=600&fit=crop', stock: 8, rating: 4.7 },
-    { id: 4, name: 'Mechanical Keyboard', description: 'RGB mechanical keyboard with Cherry MX switches', price: 89.99, category: 'Accessories', image: 'https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=1200&h=600&fit=crop', stock: 25, rating: 4.6 },
-    { id: 5, name: 'USB-C Cable', description: 'High-speed USB-C charging and data transfer cable', price: 12.99, category: 'Accessories', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=600&fit=crop', stock: 100, rating: 4.0 },
-    { id: 6, name: 'Laptop Pro', description: 'High-performance laptop with 16GB RAM and 512GB SSD', price: 1299.99, category: 'Electronics', image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&h=600&fit=crop', stock: 15, rating: 4.5 },
-    { id: 7, name: 'Wireless Mouse', description: 'Ergonomic wireless mouse with 2.4GHz receiver', price: 29.99, category: 'Accessories', image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=1200&h=600&fit=crop', stock: 50, rating: 4.2 },
-    { id: 8, name: '4K Monitor', description: '27 inch 4K UHD display with HDR support', price: 599.99, category: 'Electronics', image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=1200&h=600&fit=crop', stock: 8, rating: 4.7 },
-    { id: 9, name: 'Mechanical Keyboard', description: 'RGB mechanical keyboard with Cherry MX switches', price: 89.99, category: 'Accessories', image: 'https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=1200&h=600&fit=crop', stock: 25, rating: 4.6 },
-    { id: 10, name: 'USB-C Cable', description: 'High-speed USB-C charging and data transfer cable', price: 12.99, category: 'Accessories', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=600&fit=crop', stock: 100, rating: 4.0 },
-];
+async function getProducts(): Promise<Product[]> {
+    try {
+        const res = await fetch('http://localhost:3000/api/product', {
+            next: { revalidate: 60 },
+            cache: 'no-store'
+        });
+        const json = await res.json();
+        return json.data || [];
+    } catch (error) {
+        console.error("Fetch lỗi:", error);
+        return [];
+    }
+}
 
-export default function Home() {
-    const [products, setProducts] = useState<Product[]>([]);
+// Chuyển component thành async function
+export default async function HomePage() {
 
-    useEffect(() => {
-        // TODO: thay bằng fetch('/api/product') khi có API thật
-        setProducts(MOCK_PRODUCTS);
-    }, []);
+    const products = await getProducts();
 
     return (
         <div style={{ minHeight: '100vh', background: '#0a0a0f', fontFamily: 'Inter, sans-serif' }}>
             {/* <Navbar /> */}
+            <Navbarcomponent />
 
             {/* Hero — floats under fixed navbar */}
             <Herosection data={products} />

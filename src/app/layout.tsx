@@ -3,6 +3,7 @@ import './globals.css'
 import { NextUiProvider } from "./NextUiProvider"; 
 import { Toaster } from 'sonner'
 import NextTopLoader from 'nextjs-toploader';
+import Footer from '@/components/Footer'; 
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,6 +25,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           {children}
           <Toaster richColors={true} closeButton={true} theme='dark'/>
         </NextUiProvider>
+        <Footer />
       </body>
     </html>
   )
