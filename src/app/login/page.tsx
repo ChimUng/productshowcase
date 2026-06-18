@@ -1,6 +1,7 @@
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import LoginForm from "@/components/LoginForm";
-import Link from "next/link";
 
 const Page = () => {
     return (
@@ -10,62 +11,68 @@ const Page = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            overflow: 'hidden'
+            overflow: 'hidden',
         }}>
-            {/* Blurred Background Image */}
+            {/* Background image — dùng Next.js Image như Herosection */}
+            <Image
+                src="/background-den-11.jpg"
+                alt="Background"
+                fill
+                priority
+                style={{ objectFit: 'cover', objectPosition: 'center', zIndex: 0 }}
+            />
+
+            {/* Overlay — tương tự herogradient của Herosection:
+                - Lớp tối đều nhẹ để thấy ảnh
+                - Không blur → ảnh rõ nét, form nổi bật */}
             <div style={{
-                position: 'absolute',
-                top: -20,
-                left: -20,
-                right: -20,
-                bottom: -20,
-                backgroundImage: 'url("/background-den-11.jpg")',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                filter: 'blur(10px)',
-                zIndex: -2,
-            }} />
-            
-            {/* Dark Overlay Overlay */}
-            <div style={{
-                position: 'absolute',
-                inset: 0,
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                zIndex: -1,
+                position: 'absolute', inset: 0, zIndex: 1,
+                background: `
+                    linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.6) 100%),
+                    linear-gradient(270deg, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.45) 100%)
+                `,
             }} />
 
+            {/* Login card */}
             <div style={{
-                width: '100%',
-                maxWidth: '400px',
-                backgroundColor: '#18181B',
-                border: '1px solid #27272a',
-                borderRadius: '16px',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+                position: 'relative', zIndex: 2,
+                width: '100%', maxWidth: '400px',
+                margin: '0 16px',
+                background: 'rgba(10,10,15,0.75)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: '20px',
+                boxShadow: '0 8px 40px rgba(0,0,0,0.5)',
                 padding: '40px 36px',
-                zIndex: 1,
             }}>
                 {/* Brand */}
-                <div style={{ textAlign: 'center', marginBottom: '28px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+                    {/* Accent bar — đồng bộ với ProductCards header bar */}
+                    <div style={{
+                        width: '40px', height: '4px', borderRadius: '99px', margin: '0 auto 16px',
+                        background: 'linear-gradient(90deg, #0079CE, #4D148c)',
+                    }} />
                     <h1 style={{
-                        fontSize: '28px',
-                        fontWeight: '700',
-                        fontStyle: 'italic',
-                        color: '#D14836',
+                        fontSize: '26px', fontWeight: 800, fontStyle: 'italic',
                         margin: 0,
-                    }}>HealthPro</h1>
-                    <p style={{ fontSize: '13px', color: '#a1a1aa', marginTop: '4px' }}>
+                        background: 'linear-gradient(90deg, #0079CE, #4D148c)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                    }}>
+                        ProductShowcase
+                    </h1>
+                    <p style={{ fontSize: '13px', color: '#71717a', marginTop: '6px' }}>
                         Đăng nhập để tiếp tục
                     </p>
                 </div>
 
                 <LoginForm />
 
-                <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                    <Link href='/login' style={{
-                        fontSize: '13px',
-                        color: '#D14836',
-                        fontWeight: '500',
-                        textDecoration: 'none',
+                <div style={{ textAlign: 'center', marginTop: '22px' }}>
+                    <Link href='/register' style={{
+                        fontSize: '13px', color: '#0079CE',
+                        fontWeight: 500, textDecoration: 'none',
                     }}>
                         Chưa có tài khoản? Đăng ký ngay
                     </Link>
