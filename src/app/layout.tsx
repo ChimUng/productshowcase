@@ -17,9 +17,8 @@ interface RootLayoutProps {
 
 export default async function RootLayout({ children }: RootLayoutProps) { 
   return (
-    // Bỏ chữ 'dark' đi, dùng chế độ thường để màu sắc hiển thị đúng tone sáng rực rỡ
-    <html lang="en" suppressHydrationWarning={true}>
-      <body className={inter.className} style={{ background: '#0a0a0f', minHeight: '100vh' }}>
+    <html lang="en" className="dark text-foreground bg-background" suppressHydrationWarning={true}>
+      <body className={inter.className}>
         <NextTopLoader color="#0079CE" shadow="0 0 10px #0079CE, 0 0 5px #4D148c" />
         <NextUiProvider>
           {children}
