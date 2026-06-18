@@ -55,12 +55,10 @@ const LoginForm = () => {
                         colorScheme: 'dark',
                     }}
                     onFocus={e => e.target.style.borderColor = '#0079CE'}
-                    // KHẮC PHỤC: Đưa logic onBlur vào trong register để không đè mất onChange/name gốc của form
                     {...form.register('email', {
                         onBlur: (e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'
                     })}
                 />
-                {/* Hiện lỗi động chuẩn xác */}
                 {errors.email && (
                     <p style={{ color: '#f87171', fontSize: '12px', marginTop: '5px', marginBottom: 0 }}>
                         {errors.email.message}
@@ -91,12 +89,10 @@ const LoginForm = () => {
                         colorScheme: 'dark',
                     }}
                     onFocus={e => e.target.style.borderColor = '#0079CE'}
-                    // KHẮC PHỤC: Tương tự với ô password
                     {...form.register('password', {
                         onBlur: (e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'
                     })}
                 />
-                {/* Hiện lỗi động chuẩn xác */}
                 {errors.password && (
                     <p style={{ color: '#f87171', fontSize: '12px', marginTop: '5px', marginBottom: 0 }}>
                         {errors.password.message}
