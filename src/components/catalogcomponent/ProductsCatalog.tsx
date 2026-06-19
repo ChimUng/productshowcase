@@ -88,7 +88,10 @@ function ProductsCatalog({ searchParams }: { searchParams: any }) {
                         <Input 
                             type="number" 
                             placeholder="Từ $" 
+                            aria-label="min price"
                             size="sm"
+                            isClearable
+                            autoComplete="off"
                             value={minPrice}
                             onValueChange={(val) => handleCustomPriceChange('min', val)}
                             classNames={{ inputWrapper: "bg-[#20202b] rounded-lg h-8" }}
@@ -97,7 +100,10 @@ function ProductsCatalog({ searchParams }: { searchParams: any }) {
                         <Input 
                             type="number" 
                             placeholder="Đến $" 
+                            aria-label="max price"
                             size="sm"
+                            isClearable
+                            autoComplete="off"
                             value={maxPrice}
                             onValueChange={(val) => handleCustomPriceChange('max', val)}
                             classNames={{ inputWrapper: "bg-[#20202b] rounded-lg h-8" }}
@@ -146,6 +152,8 @@ function ProductsCatalog({ searchParams }: { searchParams: any }) {
                         placeholder="Tìm kiếm sản phẩm ở đây..."
                         value={searchvalue}
                         onValueChange={setSearchvalue}
+                        isClearable
+                        autoComplete="off"
                         classNames={{ inputWrapper: "bg-[#16161f] border border-white/5 rounded-xl h-11" }}
                         startContent={
                             <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -159,6 +167,7 @@ function ProductsCatalog({ searchParams }: { searchParams: any }) {
                         isIconOnly 
                         className="md:hidden bg-[#16161f] rounded-xl text-white border border-white/5"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        aria-label="Toggle filters"
                     >
                         <svg className="w-5 h-5 text-[#0079CE]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
